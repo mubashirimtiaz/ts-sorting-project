@@ -1,13 +1,14 @@
 import { Sortable } from './interfaces/index';
-export class Sorter {
-  constructor(public collection: Sortable) {}
-
+export abstract class Sorter {
+  abstract compare(index: number): boolean;
+  abstract swap(index: number): void;
+  abstract length: number;
   sort(): void {
-    const { length } = this.collection;
+    const { length } = this;
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < length - i - 1; j++) {
-        if (this.collection.compare(j)) {
-          this.collection.swap(j);
+        if (this.compare(j)) {
+          this.swap(j);
         }
       }
     }
